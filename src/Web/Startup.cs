@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Amazon.Polly;
+using Web.Services;
 
 namespace Web
 {
@@ -22,6 +24,12 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+
+            services.AddAWSService<IAmazonPolly>();
+
+            services.AddTransient<ITextToSpeechService, PollyTextToSpeechService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

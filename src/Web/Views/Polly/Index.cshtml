@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Polly";
+}
+<h2>@ViewData["Title"]</h2>
+
+@using (Html.BeginForm(new { action = "TextToSpeech"}))
+{
+    <textarea name="Text" style="width: 300px;">@ViewData["Text"]</textarea>
+
+    <button type="submit">Read aloud!</button>
+}
